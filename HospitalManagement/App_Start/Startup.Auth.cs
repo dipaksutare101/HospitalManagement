@@ -5,7 +5,9 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using HospitalManagement.Models;
+using HospitalManagement.Core.Models;
+using HospitalManagement.Persistence;
+
 
 namespace HospitalManagement
 {

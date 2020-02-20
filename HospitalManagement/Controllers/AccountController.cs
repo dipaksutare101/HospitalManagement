@@ -8,7 +8,9 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using HospitalManagement.Models;
+ 
+using HospitalManagement.Core.ViewModel;
+using HospitalManagement.Core.Models;
 
 namespace HospitalManagement.Controllers
 {

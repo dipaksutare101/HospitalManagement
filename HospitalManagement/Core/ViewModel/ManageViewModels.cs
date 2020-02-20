@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
-namespace HospitalManagement.Models
+namespace HospitalManagement.Core.ViewModel
 {
     public class IndexViewModel
     {

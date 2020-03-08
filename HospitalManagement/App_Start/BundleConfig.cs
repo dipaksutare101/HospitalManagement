@@ -20,8 +20,27 @@ namespace HospitalManagement
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/custom.js"));
+                       "~/Scripts/bootstrap.min.js",
+                      "~/Scripts/bootstrap-datepicker.js",
+                      "~/Scripts/clockpicker.js",
+                      "~/Scripts/custom.js",
+                      "~/Scripts/DataTables/jquery.datatables.js",
+                      "~/Scripts/DataTables/datatables.bootstrap.js",
+                      "~/Scripts/DataTables/dataTables.buttons.js",
+                        "~/Scripts/DataTables/jszip.js",
+                      "~/Scripts/DataTables/buttons.html5.js",
+                        "~/Scripts/DataTables/buttons.print.js",
+                      "~/Scripts/DataTables/pdfmake.js",
+                      "~/Scripts/DataTables/vfs_fonts.js",
+                    "~/Scripts/raphael.min.js",
+                    "~/Scripts/jquery-ui-1.12.1.min.js",
+                      "~/Scripts/bootbox.min.js",
+                      "~/Scripts/venders/iCheck/icheck.min.js",
+                      "~/Scripts/vendors/autosize",
+                      "~/Scripts/vendors/select2.full.min.js",
+                      "~/Scripts/typeahead.bundle.js",
+                      "~/Scripts/toastr.js",
+                      "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

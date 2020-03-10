@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+@using HospitalManagement.Core.Models
+@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -9,94 +12,99 @@
 
 </head>
 
-    @*<div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    </ul>
-                    @Html.Partial("_LoginPartial")
-                </div>
+@*<div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-        </div>*@
-    <body class="nav-md">
-        <div class="container body">
-            <div class="main_container">
-                <div class="col-md-3 left_col">
-                    <div class="left_col scroll-view">
-                        <div class="navbar nav_title" style="border: 0;">
-                            <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>*@
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="/" class="site_title"><i class="fa fa-hospital-o"></i> <span>Tayo Clinic</span></a>
+                    </div>
+
+
+                    <div class="clearfix"></div>
+
+                    <!-- menu profile quick info -->
+                    <div class="profile clearfix">
+                        <div class="profile_pic">
+                            <img src="images/img.jpg" alt="..." class="img-circle profile_img">
                         </div>
-
-                        <div class="clearfix"></div>
-
-                        <!-- menu profile quick info -->
-                        <div class="profile clearfix">
-                            <div class="profile_pic">
-                                <img src="images/img.jpg" alt="..." class="img-circle profile_img">
-                            </div>
-                            <div class="profile_info">
-                                <span>Welcome,</span>
-                                <h2>John Doe</h2>
-                            </div>
+                        <div class="profile_info">
+                            <span>Welcome,</span>
+                            @{
+                                var identity = (ClaimsIdentity)User.Identity;
+                                var name = identity.FindFirstValue(ClaimTypes.GivenName) ?? identity.GetUserName();
+                            }
+                            <h2>@name</h2>
                         </div>
-                        <!-- /menu profile quick info -->
+                    </div>
+                    <!-- /menu profile quick info -->
 
-                        <br />
+                    <br />
 
-                        <!-- sidebar menu -->
-                        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-                            <div class="menu_section">
-                                <h3>General</h3>
-                                <ul class="nav side-menu">
-                                    <li>
-                                        <a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                                        
-                                    </li>
-                                    <li>
-                                        <a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
-                                         
-                                    </li>
-                                    <li>
-                                        <a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
-                                         
-                                    </li>
-                                    <li>
-                                        <a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
-                                         
-                                    </li>
-                                    <li>
-                                        <a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
-                                         
-                                    </li>
-                                    <li>
-                                        <a><i class="fa fa-clone"></i>Layouts <span class="fa fa-chevron-down"></span></a>
-                                         
-                                    </li>
-                                </ul>
-                            </div>
-                            
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <ul class="nav side-menu">
+                                <li>
+                                    <a href="/"><i class="fa fa-home"></i> Dashboard </a>
+                                </li>
+                                <li><a href="@Url.Action("Index","Patients")"><i class="fa fa-edit"></i> Patient</a></li>
+                                <li><a href="@Url.Action("Index","Appointments")"><i class="fa fa-edit"></i> Appointment</a></li>
+                                <li><a href="@Url.Action("Index","Doctors")"><i class="fa fa-edit"></i> Doctors</a></li>
+                                <li> <a href="@Url.Action("Index","Account")"><i class="fa fa-edit"></i> Users </a> </li>
+
+                                <li>
+                                    <a><i class="fa fa-bar-chart-o"></i> Report <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="@Url.Action("DaillyAppointments","Reports")">Dailly Appointments </a></li>
+                                        <li><a href="@Url.Action("Appointments","Reports")">Appointments </a></li>
+                                        <li><a href="@Url.Action("Attandences","Reports")">Attandence </a></li>
+
+                                    </ul>
+                                </li>
+                            </ul>
+
+
 
                         </div>
                         <!-- /sidebar menu -->
                         <!-- /menu footer buttons -->
-                        
                         <!-- /menu footer buttons -->
                     </div>
                 </div>
 
                 <!-- top navigation -->
-                
+                <div class="top_nav">
+                    <div class="nav_menu">
+                        <nav>
+                            <div class="nav toggle">
+                                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                            </div>
+                            @Html.Partial("_LoginPartial")
+                        </nav>
+                    </div>
+                </div>
                 <!-- /top navigation -->
                 <!-- page content -->
                 <div class="right_col" role="main">
@@ -114,13 +122,14 @@
                 <!-- /footer content -->
             </div>
         </div>
+    </div>
 
         <!-- compose -->
-         
- 
+
+
 
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")
         @RenderSection("scripts", required: false)
-    </body>
+</body>
 </html>

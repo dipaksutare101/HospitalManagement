@@ -8,9 +8,11 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
- 
+using HospitalManagement.Persistence.Repositories;
 using HospitalManagement.Core.ViewModel;
 using HospitalManagement.Core.Models;
+using System.Data.Entity;
+using HospitalManagement.Persistence;
 
 namespace HospitalManagement.Controllers
 {
@@ -141,6 +143,16 @@ namespace HospitalManagement.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            return View();
+        }
+
+        public ActionResult RegisterDoctor()
+        {
+            DoctorFormViewModel dfm = new DoctorFormViewModel();
+            using (var obj = new ApplicationDbContext())
+            {
+                
+            }
             return View();
         }
 

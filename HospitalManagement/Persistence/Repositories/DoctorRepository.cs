@@ -14,6 +14,11 @@ namespace HospitalManagement.Persistence.Repositories
             _context = context;
         }
 
+        public void Add(Doctor doctor)
+        {
+            _context.Doctors.Add(doctor);
+        }
+
         public IEnumerable<Doctor> GetDoctors()
         {
             return _context.Doctors.ToList();

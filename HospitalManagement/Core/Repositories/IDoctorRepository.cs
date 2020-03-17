@@ -9,5 +9,6 @@ namespace HospitalManagement.Core.Repositories
     public interface IDoctorRepository 
     {
         IEnumerable<Doctor> GetDoctors();
+        void Add(Doctor doctor);
     }
 }

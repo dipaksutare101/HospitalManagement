@@ -13,7 +13,7 @@ using HospitalManagement.Core.ViewModel;
 using HospitalManagement.Core.Models;
 using System.Data.Entity;
 using HospitalManagement.Persistence;
-
+using HospitalManagement.Core;
 namespace HospitalManagement.Controllers
 {
     [Authorize]
@@ -21,10 +21,12 @@ namespace HospitalManagement.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
-        public AccountController()
+        private readonly IUnitOfWork _unitofWork;
+        public AccountController(IUnitOfWork unitOfWork)
         {
+            _unitofWork = unitOfWork;
         }
+         
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
@@ -148,12 +150,11 @@ namespace HospitalManagement.Controllers
 
         public ActionResult RegisterDoctor()
         {
-            DoctorFormViewModel dfm = new DoctorFormViewModel();
-            using (var obj = new ApplicationDbContext())
+            var RD = new DoctorFormViewModel()
             {
-                
-            }
-            return View();
+                Specializations =_unitofWork.Specializations.GetSpecialization()
+            };
+            return View(RD);
         }
 
         //

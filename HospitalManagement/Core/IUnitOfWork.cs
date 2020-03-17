@@ -9,9 +9,10 @@ namespace HospitalManagement.Core
 {
    public  interface IUnitOfWork
     {
-         
+
         ISpecializationRepository Specializations { get; }
-        
+        IDoctorRepository Doctors { get; }
+
         void Complete();
     }
 }

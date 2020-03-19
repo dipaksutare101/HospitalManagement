@@ -21,6 +21,7 @@ namespace HospitalManagement.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationRoleManager _roleManagar;
         private readonly IUnitOfWork _unitofWork;
         public AccountController(IUnitOfWork unitOfWork)
         {
@@ -28,10 +29,11 @@ namespace HospitalManagement.Controllers
         }
          
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ApplicationRoleManager roleManager )
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            RoleManager = roleManager;
         }
 
         public ApplicationSignInManager SignInManager
@@ -58,6 +60,18 @@ namespace HospitalManagement.Controllers
             }
         }
 
+        public ApplicationRoleManager RoleManager
+        {
+            get
+            {
+                return _roleManagar ?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
+            }
+            set
+            {
+                _roleManagar = value;
+
+            }
+        }
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -170,6 +184,7 @@ namespace HospitalManagement.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    UserManager.AddToRole(user.Id, RoleName.AdministratorRoleName);
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
@@ -198,6 +213,7 @@ namespace HospitalManagement.Controllers
                 var result = await UserManager.CreateAsync(user, model.RegisterViewModel.Password);
                 if (result.Succeeded)
                 {
+                    UserManager.AddToRole(user.Id, RoleName.DoctorRoleName);
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     Doctor objdoc = new Doctor()
